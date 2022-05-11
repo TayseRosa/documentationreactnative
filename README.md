@@ -6,6 +6,7 @@
   - [Criar um novo projeto](#criar-um-novo-projeto)
   - [Props e States](#props-e-states)
   - [InputText - Campo de Input de texto](#inputtext---campo-de-input-de-texto)
+  - [Mudando State com botões](#mudando-state-com-botões)
 - [🚀 Tecnologias utilizadas neste projeto](#-tecnologias-utilizadas-neste-projeto)
 - [📥 Como usar](#-como-usar)
 - [🚀 Autor](#-autor)
@@ -34,7 +35,7 @@
 ```
     
 ## Props e States
-```
+```js
 const Hello = ( {frase} )=>{
   const [ name,setName ] = useState('Tayse');
 
@@ -55,7 +56,7 @@ export default()=>{
 ```
 
 ## InputText - Campo de Input de texto
-```
+```js
 import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import styled from 'styled-components/native';
@@ -95,6 +96,56 @@ export default()=>{
 }
 ```
 
+## Mudando State com botões
+```js
+import React, { useState } from 'react';
+import { View, Text, Button } from 'react-native';
+import styled from 'styled-components/native';
+
+const Page = styled.SafeAreaView`
+  flex:1;
+  justify-content: center;
+  align-items: center;
+  background-color:#ccc;
+`;
+
+const Input = styled.TextInput`
+  width:200px;
+  height:40px;
+  border: 1px solid #000;
+`;
+
+
+const Hello = (texto)=>{
+  const [ name,setName ] = useState('Tayse ');
+  const [ backupName, setBackupName] = useState('');
+
+  const handleClick = () => {
+    setBackupName(name)
+  }
+
+  return(
+    <View>
+      <Input value={name} onChangeText={t=>setName(t)} />
+
+      <Button 
+        title="Trocar nome para João"
+        onPress={ handleClick }
+      />
+
+      <Text> { backupName } </Text>
+    </View>
+  )
+}
+
+export default()=>{
+  return(
+    <Page>
+      <Hello />
+    </Page>
+  )
+}
+```
 
 
 # 🚀 Tecnologias utilizadas neste projeto
@@ -106,10 +157,10 @@ export default()=>{
 ```js
 
     //Clonar o repositório
-    $ git clone 
+    $ git clone https://github.com/TayseRosa/documentationreactnative.git
 
     //Entrar no diretório
-    $ cd 
+    $ cd documentationreactnative
 
     //Instalar bilbiotecas
     $ npm install
