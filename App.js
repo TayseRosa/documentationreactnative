@@ -15,25 +15,38 @@ const Input = styled.TextInput`
   border: 1px solid #000;
 `;
 
+const Quadrado = styled.View`
+  width: 200px;
+  height: 200px;
+  margin-top:30px;
+  border:5px dashed #000;
+  justify-content: center;
+  align-items: center;
+`;
+
 
 const Hello = (texto)=>{
   const [ name,setName ] = useState('Tayse ');
-  const [ backupName, setBackupName] = useState('');
+  const [ mostrar,setMostrar ] = useState( false );
 
   const handleClick = () => {
-    setBackupName(name)
+    //Uma forma de if bem curtinha, que sempre inverte o valor, ou true ou false
+    setMostrar(!mostrar)
   }
 
   return(
     <View>
       <Input value={name} onChangeText={t=>setName(t)} />
 
-      <Button 
-        title="Trocar nome para João"
-        onPress={ handleClick }
-      />
+      <Button title={mostrar ? 'Ocultar nome' : 'Mostrar nome'} onPress={ handleClick } />
 
-      <Text> { backupName } </Text>
+    {mostrar && 
+      <Quadrado>
+        <Text> Seu nome é: </Text>
+        <Text> {name} </Text>
+      </Quadrado>
+     }
+
     </View>
   )
 }
