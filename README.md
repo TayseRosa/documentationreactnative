@@ -8,6 +8,7 @@
   - [InputText - Campo de Input de texto](#inputtext---campo-de-input-de-texto)
   - [Mudando State com botões](#mudando-state-com-botões)
   - [Condicional de Exibição](#condicional-de-exibição)
+  - [Criando input de senha (oculto)](#criando-input-de-senha-oculto)
 - [🚀 Tecnologias utilizadas neste projeto](#-tecnologias-utilizadas-neste-projeto)
 - [📥 Como usar](#-como-usar)
 - [🚀 Autor](#-autor)
