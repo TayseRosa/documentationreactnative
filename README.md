@@ -212,6 +212,78 @@ export default()=>{
 }
 ```
 
+## Criando input de senha (oculto)
+```js
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { TextInput } from 'react-native-gesture-handler';
+
+
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+export default()=>{
+
+  const [ password, setPassword ] = useState('');
+  const [ hidePassword, setHidePassword ] = useState(true);
+
+  return(
+    <View style={{flex:1,
+      backgroundColor:'#dedede',
+      alignItems:'center',
+      justifyContent:'center'}
+      }>
+
+      <View
+        style={{
+          flexDirection:'row',
+          width: '90%',
+          backgroundColor:'#121212',
+          borderRadius:5,
+          height: 50,
+          alignItems:'center'
+        }}
+      >
+
+          <TextInput 
+            placeholder='Insira sua senha'
+            placeholderTextColor={'#fff'}
+            value={password}
+            onChangeText={t=>setPassword(t)}
+            secureTextEntry={hidePassword} //Esconde a senha, transforma em bolinha
+            style={{
+              width: '90%',
+              height: 50,
+              color:'#fff',
+              padding: 8
+            }}
+          />
+
+          <TouchableOpacity
+            onPress={()=> setHidePassword(!hidePassword)}
+            style={{
+              width: '10%',
+              height:50,
+              justifyContent:'center',
+              alignItems:'center'
+            }}
+          >
+            { hidePassword
+            ?
+            <Icon name='eye' size={25} color={'#fff'} />
+            :
+            <Icon name='eye-slash' size={25} color={'#fff'} />
+            }
+          </TouchableOpacity>
+
+      </View>
+
+    </View>
+  )
+}
+
+
+```
+
 
 # 🚀 Tecnologias utilizadas neste projeto
 
