@@ -428,6 +428,42 @@ export default()=>{
 }
 ```
 
+## Enviar cor par o styled-components via props
+
+```js
+{/* Arquivo principal */}
+    <InputCustom
+      placeholder="Digite seu e-mail"
+      IconSvg={EmailIcon}
+      bgcolor={Colors.secondary}
+      value={emailField}
+      onChangeText={t => setEmailField(t)}
+    />
+    
+{/* Arquivo Componente */}   
+import React from 'react';
+import {InputArea, Input} from './styles';
+import {Colors} from '../../config/Colors';
+
+export default ({IconSvg, placeholder, value,bgcolor,  onChangeText, password}) => {
+  return (
+    <InputArea bgcolor={bgcolor}>
+      <IconSvg width="24" height="24" fill={Colors.primary} />
+      <Input
+        placeholder={placeholder}
+        placeholderTextColor={Colors.textPlaceholder}
+        value={value}
+        onChangeText={onChangeText}
+        secureTextEntry={password}
+      />
+    </InputArea>
+  );
+};
+    
+{/* Arquivo styles.js */}
+  background-color:  ${props => `${props.bgcolor}`};
+```
+
 # 🚀 Tecnologias utilizadas neste projeto
 
 - [x] JAVASCRIPT
