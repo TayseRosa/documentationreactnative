@@ -8,7 +8,7 @@
   - [InputText - Campo de Input de texto](#inputtext---campo-de-input-de-texto)
   - [Mudando State com botões](#mudando-state-com-botões)
   - [Condicional de Exibição](#condicional-de-exibição)
-  - [Criando input de senha (oculto)](#criando-input-de-senha-oculto)
+  - [Criando input de senha (oculto)](#input-de-senha-oculto)
 - [🚀 Tecnologias utilizadas neste projeto](#-tecnologias-utilizadas-neste-projeto)
 - [📥 Como usar](#-como-usar)
 - [🚀 Autor](#-autor)
@@ -213,7 +213,7 @@ export default()=>{
 }
 ```
 
-## Criando input de senha (oculto)
+## Input de senha (oculto)
 ```js
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
@@ -340,6 +340,90 @@ export default()=>{
 }
 
 /*Fonte: https://www.npmjs.com/package/yup*/
+```
+
+## Modal
+```js
+import React, { useState } from 'react';
+import { View, Text, Button, TOuchableOpacity, Modal } from 'react-native';
+import styled from 'styled-components/native';
+
+const Page = styled.SafeAreaView`
+  flex:1;
+  justify-content: center;
+  align-items: center;
+  background-color:#ccc;
+`;
+
+const ModalButton = styled.TouchableOpacity`
+  width:90%;
+  padding:10px 30px;
+  background:blue;
+  border-radius:10px;
+  justify-content:center;
+  align-items: center
+`;
+
+const ModalButtonText = styled.Text`
+  color:white;
+`;
+
+const ModalBox = styled.View`
+  width:100%;
+  height:100%;
+  background-color:rgba(0,0,0,0.7);
+  justify-content: center;
+  align-items: center;
+`;
+
+const ModalContent = styled.View`
+  width:90%;
+  height:200;
+  background: white;
+  border-radius:10px;
+`;
+
+const ModalHeader = styled.View`
+  background:black;
+  width:100%;
+  padding:10px;
+  justify-content: space-between;
+  align-items: flex-end;
+`;
+
+const ModalTextHeader = styled.Text`
+  color:white;
+`;
+
+export default()=>{
+
+  const [ modalVisible, setModalVisible ] = useState(false);
+
+  return(
+    <Page>
+
+      <ModalButton onPress={()=>setModalVisible(true)}>
+        <ModalButtonText> Abrir o modal </ModalButtonText>
+      </ModalButton>
+
+      <Modal
+        visible={modalVisible}
+        animationType="slide"
+        transparent={false}
+        onRequestClose={()=>setModalVisible(false)}
+      >
+        <ModalBox>
+          <ModalContent>
+            <ModalHeader>
+              <ModalTextHeader onPress={()=>setModalVisible(false)} > x </ModalTextHeader>
+            </ModalHeader> 
+          </ModalContent>
+        </ModalBox>
+
+      </Modal>
+    </Page>
+  )
+}
 ```
 
 # 🚀 Tecnologias utilizadas neste projeto
