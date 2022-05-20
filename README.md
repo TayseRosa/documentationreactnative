@@ -281,10 +281,66 @@ export default()=>{
     </View>
   )
 }
-
-
 ```
+## Campo de email com máscara
+```js
+import React, {useState} from 'react';
+import { View, TextInput, Button} from 'react-native';
+import * as Yup from 'yup';
 
+export default()=>{
+
+  const [ email, setEmail ] = useState('');
+
+  async function handleRegister(){
+    try{
+      const schema = Yup.object().shape({
+        email:Yup.string().email().required()
+      })
+  
+      await schema.validate({email})
+      alert('Passou');
+    }catch(error){
+      if(error instanceof Yup.ValidationError){
+        alert('Campo email obrigatório')
+      }
+    }
+  }
+
+  return(
+    <View style={{flex:1,
+      backgroundColor:'#dedede',
+      alignItems:'center',
+      justifyContent:'center'}
+      }>
+
+          <TextInput 
+            placeholderTextColor={'#fff'}
+            placeholder='Seu e-mail'
+            value={email}
+            onChangeText={t=>setEmail(t)}
+            style={{
+              backgroundColor:'#141414',
+              width:'90%',
+              borderRadius:10,
+              padding:3
+            }}
+          />
+        <Button
+          title="Salvar"
+          style={{
+            backgroundColor:'orange',
+            color:'#000',
+            marginTop:50
+          }}
+          onPress={handleRegister}
+        />
+    </View>
+  )
+}
+
+/*Fonte: https://www.npmjs.com/package/yup*/
+```
 
 # 🚀 Tecnologias utilizadas neste projeto
 
