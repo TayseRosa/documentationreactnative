@@ -345,32 +345,67 @@ export default()=>{
 ```
 
 ## Modal
+index.js
 ```js
 import React, { useState } from 'react';
-import { View, Text, Button, TOuchableOpacity, Modal } from 'react-native';
-import styled from 'styled-components/native';
+import * as S from './styles';
+import { Modal } from 'react-native';
 
-const Page = styled.SafeAreaView`
+export default()=>{
+    const [ modalVisible, setModalVisible ] = useState(false);
+
+    return(
+        <S.Page>
+
+        <S.ModalButton onPress={()=>setModalVisible(true)}>
+            <S.ModalButtonText> Abrir o modal </S.ModalButtonText>
+        </S.ModalButton>
+
+        <Modal
+            visible={modalVisible}
+            animationType="slide"
+            transparent={false}
+            onRequestClose={()=>setModalVisible(false)}
+        >
+            <S.ModalBox>
+            <S.ModalContent>
+                <S.ModalHeader>
+                <S.ModalTextHeader onPress={()=>setModalVisible(false)} > x </S.ModalTextHeader>
+                </S.ModalHeader> 
+            </S.ModalContent>
+            </S.ModalBox>
+
+        </Modal>
+        </S.Page>
+    )
+}
+```
+styles.js
+```js
+import styled from 'styled-components/native';
+import { Colors } from '../../config/Colors';
+
+export const Page = styled.SafeAreaView`
   flex:1;
   justify-content: center;
   align-items: center;
   background-color:#ccc;
 `;
 
-const ModalButton = styled.TouchableOpacity`
+export const ModalButton = styled.TouchableOpacity`
   width:90%;
   padding:10px 30px;
   background:blue;
   border-radius:10px;
   justify-content:center;
-  align-items: center
+  align-items: center;
 `;
 
-const ModalButtonText = styled.Text`
+export const ModalButtonText = styled.Text`
   color:white;
 `;
 
-const ModalBox = styled.View`
+export const ModalBox = styled.View`
   width:100%;
   height:100%;
   background-color:rgba(0,0,0,0.7);
@@ -378,14 +413,14 @@ const ModalBox = styled.View`
   align-items: center;
 `;
 
-const ModalContent = styled.View`
+export const ModalContent = styled.View`
   width:90%;
   height:200;
   background: white;
   border-radius:10px;
 `;
 
-const ModalHeader = styled.View`
+export const ModalHeader = styled.View`
   background:black;
   width:100%;
   padding:10px;
@@ -393,39 +428,9 @@ const ModalHeader = styled.View`
   align-items: flex-end;
 `;
 
-const ModalTextHeader = styled.Text`
+export const ModalTextHeader = styled.Text`
   color:white;
 `;
-
-export default()=>{
-
-  const [ modalVisible, setModalVisible ] = useState(false);
-
-  return(
-    <Page>
-
-      <ModalButton onPress={()=>setModalVisible(true)}>
-        <ModalButtonText> Abrir o modal </ModalButtonText>
-      </ModalButton>
-
-      <Modal
-        visible={modalVisible}
-        animationType="slide"
-        transparent={false}
-        onRequestClose={()=>setModalVisible(false)}
-      >
-        <ModalBox>
-          <ModalContent>
-            <ModalHeader>
-              <ModalTextHeader onPress={()=>setModalVisible(false)} > x </ModalTextHeader>
-            </ModalHeader> 
-          </ModalContent>
-        </ModalBox>
-
-      </Modal>
-    </Page>
-  )
-}
 ```
 
 ## Enviar cor par o styled-components via props
