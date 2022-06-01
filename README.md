@@ -471,17 +471,21 @@ export default ({IconSvg, placeholder, value,bgcolor,  onChangeText, password}) 
 
 ## Checkbox
 ```js
-yarn add @react-native-community/checkbox
+npm install react-native-paper
 
-import CheckBox from '@react-native-community/checkbox';
+import {Checkbox} from 'react-native-paper';
 
-const [toggleCheckBox, setToggleCheckBox] = useState(false)
+const [checked, setChecked] = useState(false);
 
-<CheckBox
-  disabled={false}
-  value={toggleCheckBox}
-  onValueChange={(newValue) => setToggleCheckBox(newValue)}
-/>
+<Checkbox
+    status={checked ? 'checked' : 'unchecked'}
+    color={Colors.primary}
+    uncheckedColor={Colors.primary}
+    onPress={() => {
+      setChecked(!checked);
+    }}
+  />
+
 ```
 
 Fonte:https://github.com/react-native-checkbox/react-native-checkbox 
