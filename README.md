@@ -469,6 +469,25 @@ export default ({IconSvg, placeholder, value,bgcolor,  onChangeText, password}) 
   background-color:  ${props => `${props.bgcolor}`};
 ```
 
+## Checkbox
+```js
+yarn add @react-native-community/checkbox
+
+import CheckBox from '@react-native-community/checkbox';
+
+const [toggleCheckBox, setToggleCheckBox] = useState(false)
+
+<CheckBox
+  disabled={false}
+  value={toggleCheckBox}
+  onValueChange={(newValue) => setToggleCheckBox(newValue)}
+/>
+```
+
+Fonte:https://github.com/react-native-checkbox/react-native-checkbox 
+
+
+
 # 🚀 Tecnologias utilizadas neste projeto
 
 - [x] JAVASCRIPT
