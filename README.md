@@ -11,6 +11,7 @@
   - [Input de senha (oculto)](#input-de-senha-oculto)
   - [Campo de email com máscara](#campo-de-email-com-máscara)
   - [Modal](#modal)
+  
 - [🚀 Tecnologias utilizadas neste projeto](#-tecnologias-utilizadas-neste-projeto)
 - [📥 Como usar](#-como-usar)
 - [🚀 Autor](#-autor)
@@ -490,6 +491,76 @@ const [checked, setChecked] = useState(false);
 
 Fonte:https://github.com/react-native-checkbox/react-native-checkbox 
 
+## Acessar câmera
+
+```
+import { PERMISSIONS, request } from 'react-native-permissions';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+
+export default () => {
+  const [ isModalVisible, setIsModalVisible ] = useState(false);
+  const [ image, setImage ] = useState();
+  
+  const handleCamera = async () => {
+    try {
+      const req = await request(
+        Platform.OS === 'ios'
+          ? PERMISSIONS.IOS.CAMERA
+          : PERMISSIONS.ANDROID.CAMERA,
+      );
+
+      if (req === 'granted') {
+        launchCamera(
+          {mediaType: 'photo', maxHeight: 720, maxWidth: 720},
+          imageObj => {
+            if (imageObj.didCancel) {
+              return;
+            }
+            //  console.log('ADD:IMG', imageObj);
+            setIsModalVisible(false);
+            setImage(imageObj.assets[0]);
+          },
+        );
+      } else {
+        Mensagem.exibirInfo('Permissão de câmera não fornecida');
+      }
+    } catch (error) {
+      console.error('UPDATE::HANDLE_CAMERA', error);
+    }
+  }; 
+ ```
+ 
+ ## Acessar galeria
+ ```
+ import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+ 
+   const handleFolder = ()=>{
+    const options = {
+      noData: true,
+      title: "Foto de avaliação",
+      takePhotoButtonTitle: "Escolha uma foto",
+      chooseFromLibraryButtonTitle: "Selecione da galeria uma foto",
+      selectionLimit: 1, // Se deixar 1, será permitido apenas uma foto e 0 várias
+    };
+
+    launchImageLibrary(options, async (response) => {
+      if (response.didCancel) {
+        console.log("Usuário cancelou a seleção");
+      } else if (response.error) {
+        console.log("Ocorreu um erro.");
+      } else {
+        const photoFile = {
+          uri: asset.uri,
+          name: asset.fileName,
+          type: "image/jpeg",
+        };
+
+        setFile(photoFile);
+      }
+    });
+  }
+ ```
+  
 
 
 # 🚀 Tecnologias utilizadas neste projeto
